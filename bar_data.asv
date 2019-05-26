@@ -19,8 +19,8 @@ b(1).FaceColor=[0.8,0.8,0.8];
 b(2).FaceColor=[0.5,0.5,0.5];
 legend('Controls','Patients');
 set(gca,'XTickLabel',xticklabel);
-xlabel(xlab);
-ylabel(ylab);
+set(gca,'XLabel',xlabel);
+set(gca,'YLabel',ylabel);
 
 hold on;
 numgroups = size(bardata, 1)

@@ -68,6 +68,8 @@ size(horzcat(vertcat(uncertaintyl',uncertaintyr'),vertcat(valley_angle_left',val
 size(horzcat(std_left',std_right'))
 %pause;
 fitval.com=fitlm((horzcat(vertcat(uncertaintyl',uncertaintyr'),vertcat(valley_angle_left',valley_angle_right')))',(horzcat(std_left',std_right'))');
+fitval.com_uncertainty=fitlm((vertcat(uncertaintyl,uncertaintyr)),(vertcat(std_left,std_right)));
+fitval.com_valleyangle=fitlm((vertcat(valley_angle_left,valley_angle_right)),(vertcat(std_left,std_right)));
 
 end
 
