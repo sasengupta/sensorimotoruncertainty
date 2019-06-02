@@ -17,7 +17,7 @@ b=bar(bardata);
 hold on
 b(1).FaceColor=[0.8,0.8,0.8];
 b(2).FaceColor=[0.5,0.5,0.5];
-legend('Controls','Patients');
+legend('Predicted','Observed');
 set(gca,'XTickLabel',xticklabel);
 xlabel(xlab);
 ylabel(ylab);

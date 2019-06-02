@@ -5,17 +5,17 @@ function [ stat_table_mod,opt_mv,errorsummary,r2,exclu] = motor_main(folder,subl
 fileid1=1;fileid2=2;nooftrials=280;       %comes from runal_init that initialises folders and file names
 currfilename_l=strcat(folder{subno},sublist{subno},type{fileid1});
 currfilename_r=strcat(folder{subno},sublist{subno},type{fileid2});
-if(subno~=7)
+%if(subno~=7)
  [ data_left,data_right ] = extract(currfilename_l,currfilename_r,nooftrials);
  [ mvtable ] = make_mvtable( data_left,data_right);
  size(mvtable)
  [ kinematic_var ] = extract_kinvariables( data_left,data_right );
-end
-if(subno==7)
-[ data_left] = extract_pd7(currfilename_l,currfilename_r,nooftrials,subno);
-[ mvtable ] = make_mvtable( data_left);
-[ kinematic_var ] = extract_kinvariables_pd7( data_left);
-end
+%end
+% if(subno==7)
+% [ data_left] = extract_pd7(currfilename_l,currfilename_r,nooftrials,subno);
+% [ mvtable ] = make_mvtable( data_left);
+% [ kinematic_var ] = extract_kinvariables_pd7( data_left);
+% end
 mvtable=horzcat(mvtable,kinematic_var);
 size(mvtable)
 figure;hold on;

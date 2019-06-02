@@ -1,4 +1,4 @@
-function [ fitval,summ_table_com] = com_fits(tablecom,filename)
+function [ fitval,summ_table_com] = com_fits(tablecom)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 %datatable=horzcat(ballspeed,st,error, ...
@@ -72,7 +72,7 @@ fitval.com_uncertainty=fitlm((vertcat(uncertaintyl,uncertaintyr)),(vertcat(std_l
 fitval.com_valleyangle=fitlm((vertcat(valley_angle_left,valley_angle_right)),(vertcat(std_left,std_right))');
 % extract data
 csvdata=horzcat(vertcat(uncertaintyl,uncertaintyr),vertcat(valley_angle_left,valley_angle_right),vertcat(std_left,std_right));
-%csvdata=vertcat({'uncertainty','valleyangle','std'},csvdata);
+csvdata=vertcat(['uncertainty','valleyangle','std'],csvdata);
 csvwrite(filename,csvdata)
 end
 

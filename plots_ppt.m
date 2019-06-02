@@ -3,6 +3,13 @@
 for i=1:1:10
 all_comdata(i,:,:)=comdata_ehc(i).summ_table_com;
 end
+x=mean(all_comdata,1);
+errorbars=std(all_comdata,1);
+for i=1:1:10
+all_comdatapd(i,:,:)=comdata_pd(i).summ_table_com;
+end
+x_pd=mean(all_comdatapd,1);
+errorbars_pd=std(all_comdatapd,1);
 %plot(x,y,errors)
 figure;errorbar(x(1,1:10,5),x(1,1:10,1),errorbars(1,1:10,1),'> b','MarkerSize',10,'MarkerFaceColor','b','MarkerEdgeColor','b');hold on;shg;pause;
 %errorbar(x(1,11:20,4),x(1,11:20,7),errorbars(1,11:20,7),'. r','MarkerSize',30,'MarkerFaceColor','r','MarkerEdgeColor','r');shg;pause;
@@ -83,6 +90,8 @@ plot(amp,pstol,'LineWidth',3,'Color','b');hold on;
 errorbar(x_pd(1,1:10,4),x_pd(1,1:10,2),errorbars_pd(1,1:10,2),'o k','MarkerSize',10,'MarkerFaceColor','k','MarkerEdgeColor','k','Linewidth',3);hold on;
 errorbar(x(1,1:10,4),x(1,1:10,2),errorbars(1,1:10,2),'> b','MarkerSize',10,'MarkerFaceColor','b','MarkerEdgeColor','b','Linewidth',3);hold on;
 
+errorbar(x_pd(1,11:20,4),x_pd(1,11:20,2),errorbars_pd(1,11:20,2),'o k','MarkerSize',10,'MarkerFaceColor','k','MarkerEdgeColor','k','Linewidth',3);hold on;
+errorbar(x(1,11:20,4),x(1,11:20,2),errorbars(1,11:20,2),'> b','MarkerSize',10,'MarkerFaceColor','b','MarkerEdgeColor','b','Linewidth',3);hold on;
 
 shg;hold on;
 set(gca,'FontSize',25);

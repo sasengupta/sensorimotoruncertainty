@@ -12,7 +12,7 @@ size(kinematic_var)
 comtable=horzcat(comtable,kinematic_var);
 [ mod_table ] = com_predict(comtable,sensory_para,motor_para)
 make_figure( subno,mod_table,sensory_para,motor_para)
- [ fitval,summ_table_com] = com_fits(mod_table)
+ [ fitval,summ_table_com] = com_fits(mod_table,strcat(num2str(subno),'.csv'))
 %optimal switching time
 %variability in switching time analysis
 %inputs: model parameters which can either be read in from memory or as an

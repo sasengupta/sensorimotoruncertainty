@@ -1,7 +1,7 @@
 subjectsnum=10;
-a=motordata(1).rawdata.peakvel(:);
+a=motordata(1).rawdata.stderror(:);
 for i=2:1:subjectsnum
-a=horzcat(a,motordata(i).rawdata.peakvel(:));
+a=horzcat(a,motordata(i).rawdata.stderror(:));
 end
 
 mt=[.45 .65 .800 1 1.2];
@@ -14,7 +14,7 @@ markersize=vertcat(8*ones(5,1),10*ones(5,1),12*ones(5,1),13*ones(5,1), ...
 14*ones(5,1),15*ones(5,1),16*ones(5,1),17*ones(5,1));
 figure;
 for i=1:1:40
-errorbar(timplots(i,1),mean_std(i,1),mean_std(i,2),'Color','k','Marker','>','MarkerSize',markersize(i,1),'MarkerFaceColor','none','MarkerEdgeColor','k');
+errorbar(timplots(i,1),mean_std(i,1),mean_std(i,2),'Color','k','Marker','>','MarkerSize',markersize(i,1),'MarkerFaceColor','k','MarkerEdgeColor','k');
 hold on;shg;pause
 end
 hold on;set(gca,'FontSize',25);
