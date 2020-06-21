@@ -1,6 +1,7 @@
-function [] = make_figure(subno, mod_table,opt_sv,opt_mv)
-%UNTITLED5 Summary of this function goes here
-%   Detailed explanation goes here
+function [] = make_figure_covariant(subno, mod_table,opt_sv,opt_mv)
+%test run with a different model for sensorymoto uncertainty
+%the difference between make_figure and make_figure_covariant is in line 11
+%and line 42.
 st=linspace(0,1.4,1000);
 amp=linspace(9.6,30.5,1000);
 tix=[0.0 0.5 1.0 1.4];
@@ -8,7 +9,7 @@ dir_change=find(mod_table(:,9)==-1,1);
 for i_amp=1:1:length(amp)
         sigmas_left(1,:)=(opt_sv(1)*((st.^(opt_sv(2)))).*((30.5-amp(i_amp))./1.4).^(opt_sv(3))).^2;
         sigmam_left(1,:)=  (amp(i_amp).*2.^(1-(((1.4-st)-opt_mv(1))/opt_mv(2)))).^2;   
-        modelvar_left(i_amp,:)= sigmas_left+sigmam_left+sqrt(sigmas_left.*sigmam_left);
+        modelvar_left(i_amp,:)= sigmas_left+sigmam_left+2*sqrt(sigmas_left.*sigmam_left);
                                  
         err_modelvar_left(i_amp,:)=sqrt(modelvar_left(i_amp,:));
         optmodelvar(i_amp)=min(sqrt(modelvar_left(i_amp,:)));
@@ -39,7 +40,7 @@ fit_parameters=fitline(mod_table(1:dir_change-1,6),mod_table(1:dir_change-1,2))
 for i_amp=1:1:length(amp)
         sigmas_right(1,:)=(opt_sv(1)*((st.^(opt_sv(2)))).*((amp(i_amp)-9.5)./1.4).^(opt_sv(3))).^2;
         sigmam_right(1,:)=(amp(i_amp).*2.^(1-(((1.4-st)-opt_mv(1))/opt_mv(2)))).^2; 
-        modelvar_right(i_amp,:)=sigmas_right+sigmam_right+sqrt(sigmas_right.*sigmam_right);
+        modelvar_right(i_amp,:)=sigmas_right+sigmam_right+2*sqrt(sigmas_right.*sigmam_right);
         err_modelvar_right(i_amp,:)=sqrt(modelvar_right(i_amp,:));
         optmodelvar(i_amp)=min(sqrt(modelvar_right(i_amp,:)));
         [modelmin_t(i_amp),modelind(i_amp)]=min(sqrt(modelvar_right(i_amp,:)));

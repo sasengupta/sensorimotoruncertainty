@@ -1,4 +1,4 @@
-subjectsnum=10;
+subjectsnum=9;
 a=motordata(1).rawdata.stderror(:);
 for i=2:1:subjectsnum
 a=horzcat(a,motordata(i).rawdata.stderror(:));

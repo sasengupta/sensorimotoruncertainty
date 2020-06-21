@@ -1,4 +1,4 @@
-function [b] = bar_data( healthydata,pddata,xticklabel,xlab,ylab)
+function [b] = bar_data( healthydata,pddata,xticklabel,xlab,ylab,panelname)
 %healthy data is a matrix with size parametersXnumberof subjects
 %1. calculate mean
 hcmean=mean(healthydata,1)
@@ -8,16 +8,16 @@ pdcount=size(pddata)
 hcerror=std(healthydata)/sqrt(hccount(1,2));
 pderror=std(pddata)/sqrt(pdcount(1,2));
 
-bardata=(vertcat(hcmean,pdmean))'
+bardata=(vertcat(hcmean,pdmean))
 pause
-errdata=(vertcat(hcerror,pderror))'
+errdata=(vertcat(hcerror,pderror))
 pause
 figure;
 b=bar(bardata);
 hold on
 b(1).FaceColor=[0.8,0.8,0.8];
 b(2).FaceColor=[0.5,0.5,0.5];
-legend('Predicted','Observed');
+%legend('Predicted','Observed');
 set(gca,'XTickLabel',xticklabel);
 xlabel(xlab);
 ylabel(ylab);
@@ -36,5 +36,10 @@ for i = 1:numbars
       %plot(xpd,pddata(:,i),'o k','MarkerFaceColor','k');
       pause;
 end
+set(gca,'Fontsize',25)
+ylim([-0.01,0.003])
+set(gca, 'ytick',-0.01:0.005:0.001)
+set(gca, 'yticklabel',[-0.01:0.005:0.01])
+saveas(gcf,panelname,'svg')
 end
 

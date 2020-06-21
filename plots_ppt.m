@@ -11,6 +11,7 @@ end
 x_pd=mean(all_comdatapd,1);
 errorbars_pd=std(all_comdatapd,1);
 %plot(x,y,errors)
+%figure1
 figure;errorbar(x(1,1:10,5),x(1,1:10,1),errorbars(1,1:10,1),'> b','MarkerSize',10,'MarkerFaceColor','b','MarkerEdgeColor','b');hold on;shg;pause;
 %errorbar(x(1,11:20,4),x(1,11:20,7),errorbars(1,11:20,7),'. r','MarkerSize',30,'MarkerFaceColor','r','MarkerEdgeColor','r');shg;pause;
 hold on;set(gca,'FontSize',25);
@@ -19,7 +20,7 @@ errorbar(x_pd(1,1:10,5),x_pd(1,1:10,1),errorbars_pd(1,1:10,1),'o k','MarkerSize'
 %errorbar(x_pd(1,11:20,4),x_pd(1,11:20,7),errorbars_pd(1,11:20,7),'< r','MarkerSize',10,'MarkerFaceColor','r','MarkerEdgeColor','r');shg;pause;
 hold on;set(gca,'FontSize',25);
 
-
+%figure2
 figure;errorbar(x(1,1:10,4),x(1,1:10,2),errorbars(1,1:10,2),'. k','MarkerSize',30,'MarkerFaceColor','k','MarkerEdgeColor','k');hold on;
 hold on;set(gca,'FontSize',25);xlim([9 30]);ylim([.5,.75]);
 ylabel('Variability in switching time (s)');
@@ -35,7 +36,7 @@ errorbar(x_pd(1,11:20,4),x_pd(1,11:20,2),errorbars_pd(1,11:20,2),'< r','MarkerSi
 hold on;set(gca,'FontSize',25);
 %legend('HC/ball starts from the left','HC/ball starts from right','PD/ball starts from the left','PD/ball starts from right')
 saveas(gcf,'st22','svg');
-
+%figure3
 figure;
 errorbar(x_pd(1,1:10,4),x_pd(1,1:10,2),errorbars(1,1:10,2),'o k','MarkerSize',10,'MarkerFaceColor','k','MarkerEdgeColor','k');hold on;
 errorbar(x(1,1:10,4),x(1,1:10,2),errorbars_pd(1,11:20,2),'> b','MarkerSize',10,'MarkerFaceColor','b','MarkerEdgeColor','b');shg;pause;
@@ -73,6 +74,7 @@ ampwithst_optileftpd.model = fitlm(x_pd(1,1:10,4),x_pd(1,1:10,3));
 ampwithst_leftpd.model = fitlm(x_pd(1,1:10,4),x_pd(1,1:10,2));
 ampwithst_left.model = fitlm(x(1,1:10,4),x(1,1:10,2));
 ampwithst_optileft.model = fitlm(x(1,1:10,4),x(1,1:10,3));
+%figure4
 figure;
 amp=linspace(9.5,30.5,100)
 pstol=ampwithst_optileft.model.Coefficients.Estimate(1)+ampwithst_optileft.model.Coefficients.Estimate(2).*amp;
@@ -82,6 +84,7 @@ pstlpd=ampwithst_leftpd.model.Coefficients.Estimate(1)+ampwithst_leftpd.model.Co
 set(gca,'FontSize',25);xlim([9 30]);ylim([.5,.75]);
 ylabel('Switching time (s)');
 xlabel('Amplitude (cm)');
+%figure5
 figure;
 plot(amp,pstlpd,'LineWidth',2,'Color','k','LineStyle','-.');hold on;
 plot(amp,pstl,'LineWidth',2,'Color','b','LineStyle','-.');hold on;

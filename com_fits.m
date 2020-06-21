@@ -4,7 +4,7 @@ function [ fitval,summ_table_com] = com_fits(tablecom,filename)
 %datatable=horzcat(ballspeed,st,error, ...
 %                   paddlefinish,indicatedposition,correctposition,ballfinishposition,hitrate,dir, ...
 %                   peak_vel,vel_at_end,deliberationtime, optempvar',predicted_st',valleyangle'                                                                              );
-
+error=tablecom(:,3);
 vel=abs(tablecom(:,1));
 st=tablecom(:,2);
 opt_st=tablecom(:,14);
@@ -20,6 +20,7 @@ for bins=1:1:10
 ind=find((vel>=br(bins)-.75) & (vel<br(bins)+.75)&(dir==-1) & (st<=1.4));
 std_right(bins,1)=std(st(ind,1));
 mean_right(bins,1)=mean(st(ind,1));
+spread_endpoint_r(bins,1)=std(error(ind,1));
 mean_ampr(bins,1)=mean(correctposition(ind,1));
 mean_velr(bins,1)=mean(vel(ind,1));
 peak_velr(bins,1)=mean(tablecom(ind,10));
@@ -36,6 +37,7 @@ size(ind)
 ind=find((vel>=br(bins)-.75) & (vel<br(bins)+.75)&(dir==1) & (st<=1.4));
 std_left(bins,1)=std(st(ind,1));
 mean_left(bins,1)=mean(st(ind,1));
+spread_endpoint_l(bins,1)=std(error(ind,1));
 mean_ampl(bins,1)=mean(correctposition(ind,1));
 mean_vell(bins,1)=mean(vel(ind,1));
 peak_vell(bins,1)=mean(tablecom(ind,10));
@@ -60,6 +62,10 @@ fitval.ampwithst_optileft.model = fitlm(correctposition(dir_change:end,1),opt_st
 fitval.corr_uncertaintyleft=corrcoef(uncertaintyl,std_left);
 fitval.corr_uncertaintyright=corrcoef(uncertaintyr,std_right);
 fitval.corr_uncertaintycom=corrcoef(vertcat(uncertaintyl',uncertaintyr'),vertcat(std_left',std_right'));
+
+fitval.corr_endpoint_uncertaintyleft=corrcoef(uncertaintyl,spread_endpoint_l);
+fitval.corr_endpoint_uncertaintyright=corrcoef(uncertaintyr,spread_endpoint_l);
+fitval.corr_endpoint_uncertaintycom=corrcoef(vertcat(uncertaintyl',uncertaintyr'),vertcat(spread_endpoint_l',spread_endpoint_l'));
 
 fitval.corr_valleyleft=corrcoef(valley_angle_left,std_left);
 fitval.corr_valleyright=corrcoef(valley_angle_right,std_right);
